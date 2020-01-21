@@ -3,8 +3,8 @@ from .forms import LoginForm
 from .models import Form
 
 # Create your views here.
-def vity_html(request, html_name):
-    return render(request, f'{html_name}.html')
+# def vity_html(request, html_name):
+#     return render(request, f'{html_name}.html')
 
 
 def index(request):
@@ -16,8 +16,13 @@ def save_form(request):
     print(request.FILES)
     print(request.POST)
 
-    form = LoginForm(request.POST)
+    form = LoginForm(request.POST,request.FILES)
     if form.is_valid():
-        F =  Form(request.POST,request.FILES)
-        F.save()
-    return render(request, f'index.html')
+        form.save()
+    return render(request, 'index.html')
+
+
+# def handle_uploaded_file(f):
+#     with open('some/file/name.txt', 'wb+') as destination:
+#         for chunk in f.chunks():
+#             destination.write(chunk)

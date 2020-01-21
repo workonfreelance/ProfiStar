@@ -1,16 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{% static "script/script.js" %}"></script>
+
+
 </head>
 <body>
-<form action="{% url 'employ:save_form' %}" method="post">
+<form enctype="multipart/form-data" id="data_form">
     {% csrf_token %}
     <table>
         {{ form }}
     </table>
-    <input type="submit" value="Send">
+    <input type="button" value="Send" id="send_button">
 </form>
 
 

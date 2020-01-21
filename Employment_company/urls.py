@@ -20,7 +20,8 @@ from Employment_company.views import *
 app_name = "employ"
 
 urlpatterns = [
-    path('', index, name="index"),
+
     path('save_form', save_form, name="save_form"),
-    path('<str:html_name>', vity_html, name="vity_html"),
+    # path('<str:html_name>', vity_html, name="vity_html"),
+    path('index', index, name="index"),
 ]
