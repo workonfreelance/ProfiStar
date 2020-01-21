@@ -10,12 +10,12 @@
 
 </head>
 <body>
-<form enctype="multipart/form-data" id="data_form">
+<form enctype="multipart/form-data" id="data_form" method="post" action="{% url 'employ:save_form' %}">
     {% csrf_token %}
     <table>
         {{ form }}
     </table>
-    <input type="button" value="Send" id="send_button">
+    <input type="submit" value="Send" id="send_button">
 </form>
 
 

@@ -8,15 +8,24 @@ function actions() {
 }
 
 function send_form_data() {
-    form = $( "#data_form" )[0];
+    // var formData = new FormData();
+    // formData.append("userfile", fileInputElement.files[0]);
+
+
+    var form = document.querySelector("#data_form");
     var data = new FormData(form);
+
+
+    // data = $("#data_form").serialize();
+    console.log(data);
     $.ajax({
         url: '/save_form',
         type: "POST",
         data: data,
         processData: false,
         success: function () {
-            alert('++++');
+
+            alert('Load was performed.');
         }
     });
 
