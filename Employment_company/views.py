@@ -1,5 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from .forms import LoginForm
+from .models import *
 from .models import Form
 
 # Create your views here.
@@ -11,6 +13,14 @@ def index(request):
     form = LoginForm()
     return render(request, f'testing_forms.html', {"form": form})
 
+def start(request):
+    jobs = Job.objects.all()
+    return render(request, f'start.html', {"jobs": jobs})
+
+
+def deteil(request,link):
+    job = Job.objects.get(link=link)
+    return render(request, f'deteil.html', {"job": job})
 
 def save_form(request):
     print(request.FILES)
@@ -19,7 +29,7 @@ def save_form(request):
     form = LoginForm(request.POST,request.FILES)
     if form.is_valid():
         form.save()
-    return render(request, 'index.html')
+    return JsonResponse({"test":"test"})
 
 
 # def handle_uploaded_file(f):

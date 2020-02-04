@@ -20,8 +20,10 @@ from Employment_company.views import *
 app_name = "employ"
 
 urlpatterns = [
-
+    path('', start, name="start"),
     path('save_form', save_form, name="save_form"),
     # path('<str:html_name>', vity_html, name="vity_html"),
     path('index', index, name="index"),
+    path('deteil/<str:link>', deteil, name="deteil"),
+
 ]

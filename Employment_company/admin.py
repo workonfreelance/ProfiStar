@@ -1,11 +1,10 @@
 from django.contrib import admin
-from .models import Form
+from .models import Form,Job,Tag
 
 # @admin.register(Job)
 # class PostAdmin(admin.ModelAdmin):
-#     list_display = (['titel'])
-    # list_filter = (['tags'])
+#     pass
 
-admin.site.register(Form)
-# admin.site.register(Job)
-# admin.site.register(Cities)
+admin.site.register(Tag)
+admin.site.register(Job)
+# # admin.site.register(Cities)

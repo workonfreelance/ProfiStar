@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Employment_company.apps.EmploymentCompanyConfig',
+    # 'taggit',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for job in jobs %}
+    <a href="{{ job.get_absolute_url }}"> {{ job.shot_name }}</a>
+    <br>
+{% endfor %}
+</body>
+</html>
