@@ -1,10 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 
-class Form(models.Model):
-    login = models.CharField(max_length=25)
-    Email = models.CharField(max_length=25)
-    file = models.FileField()
+# class Form(models.Model):
+#     login = models.CharField(max_length=25)
+#     Email = models.CharField(max_length=25)
+#     file = models.FileField()
+
 
 
 class Tag(models.Model):
@@ -13,12 +15,10 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
-
 class Job(models.Model):
     def get_absolute_url(self):
         return reverse('employ:deteil',
                        args=[self.link])
-
 
     CHOICES = (
         ("active", 'Активный'),
@@ -39,3 +39,13 @@ class Job(models.Model):
 
     class Meta:
         ordering = ('-id',)
+
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                on_delete=models.CASCADE)
+    name = models.CharField(max_length=25)
+
+
+class ShoppingBasket(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    name = models.CharField(max_length=25)

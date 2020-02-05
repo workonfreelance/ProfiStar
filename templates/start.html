@@ -5,6 +5,15 @@
     <title>Title</title>
 </head>
 <body>
+<table>
+    <tr>
+        {% for tag in tags %}
+            <td>    <a href="{{ tag.get_absolute_url }}"> {{ tag.name }}</a></td>
+        {% endfor %}
+
+    </tr>
+</table>
+
 {% for job in jobs %}
     <a href="{{ job.get_absolute_url }}"> {{ job.shot_name }}</a>
     <br>

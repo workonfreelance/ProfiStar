@@ -4,10 +4,10 @@ $(document).ready(function () {
     $form = $(this);
     var formData = new FormData(this);
     $.ajax({
-        url: "/save_form",
+        url: "/user_login",
         type: 'POST',
         data: formData,
-        success: function (response) {alert(response.json())},
+        success: function (response) {alert(response)},
         cache: false,
         contentType: false,
         processData: false
