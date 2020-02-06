@@ -13,7 +13,6 @@ def registration(request):
                 user_form.cleaned_data['password'])
             new_user.save()
             Profile.objects.create(user=new_user)
-            # ShoppingBasket.objects.create(user=new_user)
             return HttpResponse("Вышло")
         else:
             return HttpResponse("Не вышло")
@@ -32,11 +31,9 @@ def user_login(request):
         user = authenticate(request,
                             username=cd['username'],
                             password=cd['password'])
-
         if user is not None:
             if user.is_active:
                 login(request, user)
-                # return JsonResponse({"test": "test"})
                 return HttpResponse('Authenticated successfully')
             else:
                 return HttpResponse('Disabled account')
@@ -45,28 +42,23 @@ def user_login(request):
 
 def login_or(request):
     user = request.user
-    # print(user)
-    # comments = UserComment.objects.get(user=request.user.username)
-    # username = request.POST['username']
-    # password = request.POST['password']
-    # userr = authenticate(request, username=username, password=password)
     comments = UserComment.objects.filter(user = user)
-    commnet_form = CommentForm()
+    commnet_form = CommentForm( initial={'comment':"treetrt"})
     return render(request, 'old/login_or.html',{"comments":comments,"commnet_form":commnet_form})
 
 def add_comment(request):
     user = request.user
     comment = request.POST["comment"]
-    print(user)
-    print(comment)
     UserComment.objects.create(user=user,comment = comment)
-    # UserComment.comment = comment
-    # UserComment.save()
     return HttpResponse("Вышло")
 
 def login_out(request):
     logout(request)
     return HttpResponse("вышли")
+
+
+
+
 
 # Create your views here.
 # def vity_html(request, html_name):
