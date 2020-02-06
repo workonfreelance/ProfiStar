@@ -35,3 +35,7 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
 
+class UserLoginForm(forms.ModelForm):
+    username = forms.CharField(label='Your name', max_length=100)
+    password = forms.CharField(label='Password',
+                               widget=forms.PasswordInput)

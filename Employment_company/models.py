@@ -45,7 +45,13 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE)
     name = models.CharField(max_length=25)
 
+    def __str__(self):
+        return str(self.user)
 
-class ShoppingBasket(models.Model):
+class UserComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(max_length=25)
+    comment = models.CharField(max_length=200)
+    def __str__(self):
+        return str(self.user)
+
+

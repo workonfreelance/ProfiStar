@@ -14,6 +14,20 @@ $(document).ready(function () {
     });});
 
 
+    $('#id_login_form').submit(function(e){
+    e.preventDefault();
+    $form = $(this);
+    var formData = new FormData(this);
+    $.ajax({
+        url: "/user_login",
+        type: 'POST',
+        data: formData,
+        success: function (response) {alert(response)},
+        cache: false,
+        contentType: false,
+        processData: false
+    });});
+
 
 });
 

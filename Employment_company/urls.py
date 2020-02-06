@@ -21,11 +21,14 @@ app_name = "employ"
 
 urlpatterns = [
     path('registration', registration, name="registration"),
+    path('login',loginHTML,name="login"),
+    path('user_login',user_login,name="user_login"),
+
     # path('', start, name="start"),
     # path('save_form', save_form, name="save_form"),
     # # path('<str:html_name>', vity_html, name="vity_html")
-    # path('login_out', login_out, name="login_out"),
-    # path('login_or',login_or,name="login_or"),
+    path('login_out', login_out, name="login_out"),
+    path('login_or',login_or,name="login_or"),
     # path('user_login',user_login,name="user_login"),
     # path('index', index, name="index"),
     # path('deteil/<str:link>', deteil, name="deteil"),

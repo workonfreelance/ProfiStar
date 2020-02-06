@@ -1,11 +1,8 @@
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
-from .forms import LoginForm
+from .forms import LoginForm, UserRegistrationForm
 from .models import *
-from django.shortcuts import get_object_or_404
-# from .models import Form
-from django.contrib.auth import authenticate, login,logout
-from .forms import UserRegistrationForm
+from django.contrib.auth import authenticate, login, logout
 
 def registration(request):
     if request.method == 'POST':
@@ -16,6 +13,7 @@ def registration(request):
                 user_form.cleaned_data['password'])
             new_user.save()
             Profile.objects.create(user=new_user)
+            # ShoppingBasket.objects.create(user=new_user)
             return HttpResponse("Вышло")
         else:
             return HttpResponse("Не вышло")
@@ -23,6 +21,34 @@ def registration(request):
         user_form = UserRegistrationForm()
         return render(request,'register.html',{'user_form': user_form})
 
+def loginHTML(request):
+    user_form = LoginForm()
+    return render(request, f'login.html',{'user_form': user_form})
+
+def user_login(request):
+    form = LoginForm(request.POST)
+    if form.is_valid():
+        cd = form.cleaned_data
+        user = authenticate(request,
+                            username=cd['username'],
+                            password=cd['password'])
+
+        if user is not None:
+            if user.is_active:
+                login(request, user)
+                # return JsonResponse({"test": "test"})
+                return HttpResponse('Authenticated successfully')
+            else:
+                return HttpResponse('Disabled account')
+        else:
+            return HttpResponse('Invalid login')
+
+def login_or(request):
+    return render(request, 'old/login_or.html')
+
+def login_out(request):
+    logout(request)
+    return HttpResponse("вышли")
 
 # Create your views here.
 # def vity_html(request, html_name):
@@ -78,8 +104,7 @@ def registration(request):
 #         else:
 #             return HttpResponse('Invalid login')
 #
-# def login_or(request):
-#     return render(request, f'old/login_or.html')
+
 # # def handle_uploaded_file(f):
 # #     with open('some/file/name.txt', 'wb+') as destination:
 # #         for chunk in f.chunks():

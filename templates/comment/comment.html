@@ -5,9 +5,17 @@
     <title>Title</title>
 </head>
 <body>
+
+
 {% if user.is_authenticated %}
+
+
+
     login
     {{ user.get_username }}
+
+
+
 {% else %}
     not_login
 {% endif %}
