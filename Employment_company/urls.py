@@ -23,6 +23,7 @@ urlpatterns = [
     path('registration', registration, name="registration"),
     path('login',loginHTML,name="login"),
     path('user_login',user_login,name="user_login"),
+    path('add_comment', add_comment, name="add_comment"),
 
     # path('', start, name="start"),
     # path('save_form', save_form, name="save_form"),

@@ -7,8 +7,6 @@ from django.conf import settings
 #     Email = models.CharField(max_length=25)
 #     file = models.FileField()
 
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=15)
 

@@ -13,6 +13,8 @@ class LoginForm(forms.Form):
     username = forms.CharField(label='Your name', max_length=100)
     password = forms.CharField(label='Your password',widget=forms.PasswordInput)
 
+class CommentForm(forms.Form):
+    comment = forms.CharField(label='Your comment', max_length=100)
 
 
 class UserRegistrationForm(forms.ModelForm):

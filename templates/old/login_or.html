@@ -1,15 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static "script/script.js" %}"></script>
 </head>
 <body>
 {% if user.is_authenticated %}
     login
     {{ user.get_username }}
+    <br>
+    {% for comment in comments %}
+        <br>
+        <a>----------------------</a>
+        <br>
+        <a> {{ comment.comment }}</a>
+    {% endfor %}
+    <form id="comment_form_2">
+        {% csrf_token %}
+        <table>
+            {{ commnet_form }}
+        </table>
+        <input type="submit" value="Send" >
+    </form>
+
 {% else %}
     not_login
 {% endif %}
+
+
 </body>
 </html>

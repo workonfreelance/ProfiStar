@@ -1,6 +1,6 @@
 from django.http import JsonResponse, HttpResponse
 from django.shortcuts import render
-from .forms import LoginForm, UserRegistrationForm
+from .forms import LoginForm, UserRegistrationForm, CommentForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
 
@@ -44,7 +44,25 @@ def user_login(request):
             return HttpResponse('Invalid login')
 
 def login_or(request):
-    return render(request, 'old/login_or.html')
+    user = request.user
+    # print(user)
+    # comments = UserComment.objects.get(user=request.user.username)
+    # username = request.POST['username']
+    # password = request.POST['password']
+    # userr = authenticate(request, username=username, password=password)
+    comments = UserComment.objects.filter(user = user)
+    commnet_form = CommentForm()
+    return render(request, 'old/login_or.html',{"comments":comments,"commnet_form":commnet_form})
+
+def add_comment(request):
+    user = request.user
+    comment = request.POST["comment"]
+    print(user)
+    print(comment)
+    UserComment.objects.create(user=user,comment = comment)
+    # UserComment.comment = comment
+    # UserComment.save()
+    return HttpResponse("Вышло")
 
 def login_out(request):
     logout(request)
