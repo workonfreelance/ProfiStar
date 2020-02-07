@@ -20,6 +20,8 @@ from Employment_company.views import *
 app_name = "employ"
 
 urlpatterns = [
+    path('', start, name="start"),
+
     path('registration', registration, name="registration"),
     path('login',loginHTML,name="login"),
     path('user_login',user_login,name="user_login"),

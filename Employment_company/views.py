@@ -1,8 +1,22 @@
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import LoginForm, UserRegistrationForm, CommentForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
+
+def start(request):
+    # user = request.user
+    # if user.is_authenticated():
+
+    # jobs = Job.objects.all()
+    # commnet_form = CommentForm( initial={'comment':"treetrt"})
+    login_form = LoginForm()
+    return render(request, 'main_form.html',{"login_form":login_form})
+
+def login_out(request):
+    logout(request)
+    return redirect('employ:start')
+
 
 def registration(request):
     if request.method == 'POST':
@@ -18,11 +32,11 @@ def registration(request):
             return HttpResponse("Не вышло")
     else:
         user_form = UserRegistrationForm()
-        return render(request,'register.html',{'user_form': user_form})
+        return render(request, 'old/register.html', {'user_form': user_form})
 
 def loginHTML(request):
     user_form = LoginForm()
-    return render(request, f'login.html',{'user_form': user_form})
+    return render(request, f'old/login.html', {'user_form': user_form})
 
 def user_login(request):
     form = LoginForm(request.POST)
@@ -42,19 +56,16 @@ def user_login(request):
 
 def login_or(request):
     user = request.user
-    comments = UserComment.objects.filter(user = user)
+    comments = Comment.objects.filter(user = user)
     commnet_form = CommentForm( initial={'comment':"treetrt"})
     return render(request, 'old/login_or.html',{"comments":comments,"commnet_form":commnet_form})
 
 def add_comment(request):
     user = request.user
     comment = request.POST["comment"]
-    UserComment.objects.create(user=user,comment = comment)
+    Comment.objects.create(user=user,comment = comment)
     return HttpResponse("Вышло")
 
-def login_out(request):
-    logout(request)
-    return HttpResponse("вышли")
 
 
 

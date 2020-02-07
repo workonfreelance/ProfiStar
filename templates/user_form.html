@@ -1,0 +1,17 @@
+{% block user_form %}
+
+{% if user.is_authenticated %}
+    Имя пользователя -> <a href="#">{{ user.get_username }}</a>
+    <br>
+    <a href="{% url 'employ:login_out' %}">Выйти</a>
+{% else %}
+    <form id="id_login_form" >
+    {% csrf_token %}
+    <table>
+        {{ login_form }}
+    </table>
+    <input type="submit" value="Send" id="send_button">
+</form>
+{% endif %}
+
+{% endblock user_form %}

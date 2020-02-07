@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Job,Tag,Profile,UserComment
+from .models import Job,Tag,Profile,Comment
 
 # @admin.register(Job)
 # class PostAdmin(admin.ModelAdmin):
@@ -8,5 +8,5 @@ from .models import Job,Tag,Profile,UserComment
 admin.site.register(Tag)
 admin.site.register(Job)
 admin.site.register(Profile)
-admin.site.register(UserComment)
+admin.site.register(Comment)
 # # admin.site.register(Cities)

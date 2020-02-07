@@ -27,7 +27,8 @@ $(document).ready(function () {
             type: 'POST',
             data: formData,
             success: function (response) {
-                alert(response)
+                alert(response);
+                location.reload();
             },
             cache: false,
             contentType: false,
