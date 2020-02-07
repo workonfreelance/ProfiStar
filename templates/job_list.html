@@ -1,0 +1,6 @@
+{% block job_list %}
+    {% for job in jobs %}
+        <a href="{{ job.get_absolute_url }}"> {{ job.shot_name }}</a>
+        <br>
+    {% endfor %}
+{% endblock job_list %}

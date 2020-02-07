@@ -1,15 +1,26 @@
 {% load static %}
-{% include 'user_form.html' %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="{% static "script/script.js" %}"></script>
+
+
+
 </head>
+
+
 <body>
-{% block user_form %}
-{% endblock %}
+
+{% include 'user_form.html' %}
+
+<br>
+------------------------
+<br>
+
+{% include 'job_list.html' %}
+
 </body>
 </html>

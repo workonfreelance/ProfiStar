@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="{% static "script/script.js" %}"></script>
+</head>
+<body>
+<input hidden id ="a_job_id" value="{{ job.id }}">
+
+<a> {{ job.shot_name }}</a>
+<br>
+<a href="{% url 'employ:start' %}">Назад</a>
+<br>
+
+{% for comment in comments %}
+    <br>
+    <a> -->{{ comment.comment }}</a>
+{% endfor %}
+
+<br>
+<br>
+<a>----------------------</a>
+<br>
+
+{% if user.is_authenticated %}
+    <form id="comment_form_2">
+        {% csrf_token %}
+        <table>
+            {{ commnet_form }}
+        </table>
+        <input type="submit" value="Send" >
+    </form>
+
+{% else %}
+    Не залогиненный пользователь
+{% endif %}
+</body>
+</html>

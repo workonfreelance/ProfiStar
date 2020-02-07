@@ -1,7 +1,6 @@
 $(document).ready(function () {
     $('#id_form').submit(function (e) {
         e.preventDefault();
-        alert("1111");
         $form = $(this);
         var formData = new FormData(this);
         $.ajax({
@@ -9,7 +8,8 @@ $(document).ready(function () {
             type: 'POST',
             data: formData,
             success: function (response) {
-                alert(response)
+                alert(response);
+                window.location.href = '/';
             },
             cache: false,
             contentType: false,
@@ -27,7 +27,6 @@ $(document).ready(function () {
             type: 'POST',
             data: formData,
             success: function (response) {
-                alert(response);
                 location.reload();
             },
             cache: false,
@@ -41,12 +40,14 @@ $(document).ready(function () {
         e.preventDefault();
         $form = $(this);
         var formData = new FormData(this);
+        id = $("#a_job_id").val();
+        formData.append("job_id", id);
         $.ajax({
             url: "/add_comment",
             type: 'POST',
             data: formData,
             success: function (response) {
-                alert(response)
+                location.reload();
             },
             cache: false,
             contentType: false,

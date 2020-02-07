@@ -8,12 +8,14 @@
     <script src="{% static "script/script.js" %}"></script>
 </head>
 <body>
-<form id="id_form" >
+<form id="id_form">
     {% csrf_token %}
     <table>
         {{ user_form }}
     </table>
     <input type="submit" value="Send" id="send_button">
 </form>
+<br>
+<a href="{% url 'employ:start' %}">Назад</a>
 </body>
 </html>
