@@ -129,3 +129,12 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'spainszlo@gmail.com'
+EMAIL_HOST_PASSWORD = 'rwphqpncuegejwcg'
+DEFAULT_FROM_EMAIL = 'spainszlo@gmail.com'
+DEFAULT_TO_EMAIL = 'spainszlo@gmail.com'

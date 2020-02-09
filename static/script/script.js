@@ -35,6 +35,24 @@ $(document).ready(function () {
         });
     });
 
+    $('#id_profile_form').submit(function (e) {
+        e.preventDefault();
+        $form = $(this);
+        var formData = new FormData(this);
+        $.ajax({
+            url: "/updata_user_info",
+            type: 'POST',
+            data: formData,
+            success: function () {
+                location.reload();
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+
+
 
     $('#comment_form_2').submit(function (e) {
         e.preventDefault();

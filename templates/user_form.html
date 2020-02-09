@@ -1,7 +1,7 @@
 {% block user_form %}
 
     {% if user.is_authenticated %}
-        Имя пользователя -> <a href="#">{{ user.get_username }}</a>
+        Имя пользователя -> <a href="{% url 'employ:user_info' %}">{{ user.get_username }}</a>
         <br>
         <a href="{% url 'employ:login_out' %}">Выйти</a>
     {% else %}

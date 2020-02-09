@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.conf import settings
-
+import random
 
 
 class Tag(models.Model):
@@ -54,4 +54,8 @@ class Comment(models.Model):
         job = self.job.shot_name
         return user + job
 
-
+class ActionLink(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    r_link = random.randint(123456789,999999999)
+    r_link = str(r_link)
+    link = models.CharField(default=r_link,max_length=50)

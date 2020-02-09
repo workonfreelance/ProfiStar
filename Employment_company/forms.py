@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-
+from .models import *
 
 # class LoginForm(ModelForm):
 #     class Meta:
@@ -41,3 +41,9 @@ class UserLoginForm(forms.ModelForm):
     username = forms.CharField(label='Your name', max_length=100)
     password = forms.CharField(label='Password',
                                widget=forms.PasswordInput)
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['name', 'img', 'text']

@@ -1,23 +1,43 @@
 from django.http import JsonResponse, HttpResponse
-from django.shortcuts import render, redirect
-from .forms import LoginForm, UserRegistrationForm, CommentForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .forms import LoginForm, UserRegistrationForm, CommentForm, ProfileForm
 from .models import *
 from django.contrib.auth import authenticate, login, logout
+from django.core.mail import EmailMessage, send_mail
 
 
 def start(request):
-    # user = request.user
-    # if user.is_authenticated():
     jobs = Job.objects.all()
     # commnet_form = CommentForm( initial={'comment':"treetrt"})
     login_form = LoginForm()
     return render(request, 'main_form.html', {"login_form": login_form, "jobs": jobs})
 
+def user_activ(request, link):
+    act_link = get_object_or_404(ActionLink, link=link)
+    act_link.user.is_active = True
+    act_link.user.save()
+    return redirect('employ:start')
 
 def login_out(request):
     logout(request)
     return redirect('employ:start')
 
+def set_email_action(new_user):
+    # try:
+    act = ActionLink.objects.create(user=new_user)
+    link = act.link
+    data = f"http://127.0.0.1:8000/action/{link}"
+    email = EmailMessage('active', data, 'site', ['spainszlo@gmail.com'])
+    email.send()
+    #     return True
+    # except:
+    #     return False
+
+def updata_user_info(request):
+    profile = Profile.objects.get(user=request.user)
+    form = ProfileForm(request.POST,request.FILES,instance=profile)
+    form.save()
+    return redirect('employ:user_info')
 
 def registration(request):
     if request.method == 'POST':
@@ -26,8 +46,12 @@ def registration(request):
             new_user = user_form.save(commit=False)
             new_user.set_password(
                 user_form.cleaned_data['password'])
+            new_user.is_active = False
             new_user.save()
             Profile.objects.create(user=new_user)
+
+            set_email_action(new_user)
+
             return HttpResponse("Вышло")
         else:
             return HttpResponse("Не вышло")
@@ -35,6 +59,10 @@ def registration(request):
         user_form = UserRegistrationForm()
         return render(request, 'register.html', {'user_form': user_form})
 
+def user_info(request):
+    pofile = Profile.objects.get(user=request.user)
+    profile_form = ProfileForm(instance=pofile)
+    return render(request, 'user_info.html', {"profile_form": profile_form})
 
 def deteil(request, link):
     # job = Job.objects.get(link=link)
@@ -47,15 +75,13 @@ def deteil(request, link):
     except Job.DoesNotExist:
         return render(request, f'old/error.html')
 
-
 def add_comment(request):
     user = request.user
     comment = request.POST["comment"]
     job_id = int(request.POST["job_id"])
-    job = Job.objects.get(id = job_id)
-    Comment.objects.create(user=user,job=job ,comment=comment)
+    job = Job.objects.get(id=job_id)
+    Comment.objects.create(user=user, job=job, comment=comment)
     return HttpResponse("Вышло")
-
 
 def user_login(request):
     form = LoginForm(request.POST)
